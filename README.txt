@@ -33,3 +33,5 @@ sampling frequency: 16kHz
 
 비표준 발음으로 들리는 경우 표준어로 표현
 축약 발성은 표준어로 표현
+
+인코딩 예시는 Training/0.0baesubin/00002

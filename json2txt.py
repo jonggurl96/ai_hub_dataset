@@ -1,5 +1,4 @@
 import os
-import glob
 import json
 from tqdm import tqdm
 
@@ -69,14 +68,20 @@ for sd in sub_dir:
           
           # 음성 텍스트
           stt = jf["발화정보"]["stt"]
+          scriptId = jf["발화정보"]["scriptId"]
 
           # "일반통합-20281" => "일반통합", 20281
-          scriptId = jf["발화정보"]["scriptId"]
           if "-" in scriptId:
             chapter, scriptId = scriptId.split("-")
-          else: # 자유대화의 경우 "scriptId": "P"
+          
+          # 자유대화의 경우 "scriptId": "P"
+          elif scriptId == "P":
             chapter = "자유대화"
             scriptId = jf["발화정보"]["fileNm"].split("_")[-1].split(".")[0]
+          
+          # 일반통합 scriptId: "00002"
+          else:
+            chapter = "일반통합"
         
         # sd_path/recorder/chapter/recorder-chapter.trans.txt
         filepath = os.path.join(sd_path, recorder, chapter)
